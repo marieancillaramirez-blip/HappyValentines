@@ -1,0 +1,281 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 0;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+  color: inherit;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+span {
+  display: block;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f79d65;
+  font-family: "Bungee", cursive;
+  user-select: none;
+}
+
+/* Message container */
+.message {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+/* Clicked state */
+.message.clicked {
+  background-color: #ff6b6b;
+  border-radius: 0;
+  width: 100%;
+  height: 100vh;
+  transition: all 1s ease;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.message.clicked:hover {
+  transform: none;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.message.clicked .message__btn {
+  display: none;
+}
+
+.message.clicked .message__text {
+  opacity: 1;
+  visibility: visible;
+  animation: text 0.6s 1s ease both;
+  top: 20px;
+  left: 50px;
+  transform: none;
+}
+
+/* Text animation */
+@keyframes text {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Button */
+.message__btn {
+  background-color: #ff6b6b;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: all 0.2s cubic-bezier(0.55, 0.41, 0.37, 1.41);
+  cursor: pointer;
+  font-family: "Bungee", cursive;
+  color: white;
+  letter-spacing: 2px;
+  z-index: 2;
+  border: 2px solid #cc444b;
+  box-shadow: 0px 8px 0px -2px #e63946, 0px 8px 0px 0px #cc444b;
+}
+
+.message__btn:hover {
+  transform: translateY(3px);
+  box-shadow: 0px 0px 0px -2px #e63946, 0px 0px 0px 0px #cc444b;
+}
+
+/* Text wrapper */
+.message__text {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  z-index: 1;
+}
+
+/* Letters */
+.message__letters {
+  font-size: 63px;
+  padding: 10px;
+  margin: 0 -5px;
+  text-transform: uppercase;
+  position: relative;
+  -webkit-text-stroke: 2px #cc444b;
+  animation: letters 1s ease infinite alternate both;
+}
+
+/* Letters animation */
+@keyframes letters {
+  0% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Delay mixin output */
+.message__letters:nth-child(1) { animation-delay: 0.6s; }
+.message__letters:nth-child(2) { animation-delay: 0.8s; }
+.message__letters:nth-child(3) { animation-delay: 1s; }
+.message__letters:nth-child(4) { animation-delay: 1.2s; }
+.message__letters:nth-child(5) { animation-delay: 1.4s; }
+/* … continues up to 100 */
+.message__letters:nth-child(100) { animation-delay: 20.4s; }
+
+/* Hover effects */
+.message__letters:hover {
+  animation-play-state: paused;
+}
+
+.message__letters:hover .message__letterMain {
+  transform: translateY(-20px);
+  transition: all 0.4s ease, transform 0.4s ease;
+}
+
+.message__letters:hover .message__letterShadow {
+  transform: translateY(-30px);
+  filter: blur(10px);
+  transition: all 0.4s ease, transform 0.4s ease;
+}
+
+/* Letter main */
+.message__letterMain {
+  position: relative;
+  user-select: none;
+  z-index: 1;
+  transition: all 0.4s ease, transform 2s 0.4s ease;
+}
+
+/* Letter shadow */
+.message__letterShadow {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  color: #e63946;
+  transition: all 0.4s ease, transform 2s 0.4s ease;
+}
+
+/* Responsive (max-width: 900px) */
+@media screen and (max-width: 900px) {
+  .message__letters {
+    font-size: 40px;
+    padding: 5px;
+  }
+
+  .message__letterShadow {
+    top: 10px;
+  }
+}
+
+/* Reload button */
+.reload {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 1;
+  border-radius: 40px;
+  background-color: #f27059;
+  width: 100px;
+  height: 40px;
+  font-family: "Bungee", cursive;
+  color: white;
+  font-size: 10px;
+  letter-spacing: 2px;
+  border: 2px solid #cc444b;
+  box-shadow: 0px 6px 0px -2px #e63946, 0px 6px 0px 0px #cc444b;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: none;
+}
+
+.reload:hover,
+.reload:focus {
+  transform: translateY(3px);
+  box-shadow: 0px 0px 0px -2px #e63946, 0px 0px 0px 0px #cc444b;
+}
+
+/* Canvas */
+canvas {
+  display: block;
+  vertical-align: bottom;
+  z-index: -1;
+}
+
+/* Particles container */
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  visibility: hidden;
+  transform: scale(0);
+  transition: all 0.4s ease;
+}
+
+#particles-js.show {
+  visibility: visible;
+  transform: scale(1);
+}
+
+.message__text {
+  position: absolute;
+  top: 30px;              /* distance from top */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+}
+
+.readmore {
+  margin: 40px;
+  border: 2px solid black;
+  background-color: transparent;
+  color: black;
+  width: 90px;
+  height: 90px;
+  border-radius: 100%;
+  text-transform: uppercase;
+  font-size: 15px;
+  line-height: 1.3;
+  cursor: pointer;
+  transition: all 500ms;
+  background-image: linear-gradient(to bottom, transparent 0%, transparent 50%, black 50%, black 100%);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 90px 180px;
+}
+
+.readmore:hover {
+  color: white;
+  background-position: 0 -90px;
+}
