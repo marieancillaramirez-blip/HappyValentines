@@ -354,3 +354,38 @@ footer svg {
   transform: translateY(3px);
   box-shadow: 0px 0px 0px -2px #e63946, 0px 0px 0px 0px #cc444b;
 }
+
+.return-home {
+    position: fixed; /* Keeps it in the same spot on the screen */
+    top: 20px;       /* Distance from the top */
+    right: 20px;     /* Distance from the right */
+    z-index: 1000;   /* Ensures it stays above the envelope and letters */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    text-decoration: none;
+}
+
+.return-icon {
+    width: 50px;     /* Adjust size as needed */
+    height: auto;
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2)); /* Adds a soft depth */
+}
+
+/* Hover Effect to make it feel interactive */
+.return-home:hover {
+    transform: scale(1.1); /* Slightly grows when hovered */
+    filter: brightness(1.2); /* Brightens the PNG slightly */
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 600px) {
+    .return-home {
+        top: 10px;
+        right: 10px;
+    }
+    .return-icon {
+        width: 40px;
+    }
+}
