@@ -4,6 +4,7 @@ const songs = [
     id: 1,
     title: "Colors",
     artist: "Halsey",
+    src: "music/colors-trimmed.mp3",
     lyricSnippet: '"I found a love, for me... darling just dive right in and follow my lead. Well, I found a girl, beautiful and sweet. Oh, I never knew you were the someone waiting for me."',
     loveNote: "This song is literally us. The first time I heard it, I thought of you dancing with me in the kitchen at 2am. You make every ordinary moment feel like a movie scene.",
     duration: "4:23",
@@ -13,6 +14,7 @@ const songs = [
     id: 2,
     title: "Pillow Talk",
     artist: "Zayne Malik",
+    src: "music/colors-trimmed.mp3",
     lyricSnippet: '"Cause all of me loves all of you. Love your curves and all your edges, all your perfect imperfections. Give your all to me, I\'ll give my all to you."',
     loveNote: "I love every single part of you, even the parts you think are flawed. You are my entire world and I wouldn't change a single thing about you, baby.",
     duration: "4:29",
@@ -22,6 +24,7 @@ const songs = [
     id: 3,
     title: "I wanna be yours",
     artist: "Artic Monkeys",
+    src: "music/colors-trimmed.mp3",
     lyricSnippet: '"There goes my heart beating, cause you are the reason. I\'m losing my sleep, please come back now. And there goes my mind racing, and you are the reason that I\'m still breathing, I\'m hopeless now."',
     loveNote: "Remember that night we stayed up until sunrise just talking? You are the reason I believe in forever. Every heartbeat is for you.",
     duration: "3:24",
@@ -29,8 +32,9 @@ const songs = [
   },
   {
     id: 4,
-    title: "Eye Closed",
-    artist: "Zayne Malike ft. Jisoo",
+    title: "Terrified",
+    artist: "Katherine McPhee",
+    src: "music/colors-trimmed.mp3",
     lyricSnippet: '"So honey now, take me into your loving arms. Kiss me under the light of a thousand stars. Place your head on my beating heart. I\'m thinking out loud, maybe we found love right where we are."',
     loveNote: "When we're 70 and gray, I still want to be dancing with you. This song reminds me that what we have is timeless. You're my forever person.",
     duration: "4:41",
@@ -40,6 +44,7 @@ const songs = [
     id: 5,
     title: "Valentine",
     artist: "Laufey",
+    src: "music/colors-trimmed.mp3",
     lyricSnippet: '"I have died every day waiting for you. Darling, don\'t be afraid, I have loved you for a thousand years. I\'ll love you for a thousand more."',
     loveNote: "It feels like my heart knew you before we ever met. Every moment with you feels like it was meant to be. I'd choose you in every lifetime. Happy Valentine's Day, my love.",
     duration: "4:45",
@@ -70,6 +75,7 @@ const nextBtn      = document.getElementById("nextBtn");
 const revealArea   = document.getElementById("revealArea");
 const progressBar  = document.getElementById("progressBar");
 const listContainer = document.getElementById("songListContainer");
+const mainAudio = document.getElementById("mainAudio");
 
 // ── Helpers ────────────────────────────────────────
 function parseDuration(str) {
@@ -135,12 +141,13 @@ function updateDisplay() {
   timeDuration.textContent = song.duration;
   artGradient.style.background = song.gradient;
 
-  if (isPlaying) {
+  if (mainAudio.src !== song.src) {
     albumArt.classList.add("playing");
     vinylDisc.classList.add("spinning");
     playIcon.style.display = "none";
     pauseIcon.style.display = "block";
     playBtn.setAttribute("aria-label", "Pause");
+    mainAudio.src = song.src;
   } else {
     albumArt.classList.remove("playing");
     vinylDisc.classList.remove("spinning");
@@ -209,9 +216,11 @@ function stopProgress() {
 function togglePlay() {
   isPlaying = !isPlaying;
   if (isPlaying) {
-    startProgress();
-    showReveals();
+    mainAudio.play(); // Starts the MP3
+    startProgress();  // Starts the progress bar
+    showReveals();    // Shows the lyrics/note
   } else {
+    mainAudio.pause(); // Pauses the MP3
     stopProgress();
     revealArea.style.display = "none";
   }
