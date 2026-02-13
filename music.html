@@ -1,59 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="music.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d0d0d" />
+  <title>For You, My Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="music.css" />
 </head>
 <body>
-   <div id="player-bg-artwork"></div>
-<div id="player-bg-layer"></div>
-<div id="player-container">
-  <div id="player">
-    <div id="player-track">
-      <div id="album-name"></div>
-      <div id="track-name"></div>
-      <div id="track-time">
-        <div id="current-time"></div>
-        <div id="track-length"></div>
+  <main class="page">
+    <section class="cssletter">
+      <a href="intro.html" class="return-home" title="Go Back">
+    <img src="white-turn.png" alt="Return" class="return-icon">
+</a>
+    <!-- Header -->
+    <header class="header fade-in">
+      <div class="header-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <span>Valentine's Playlist</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
       </div>
-      <div id="seek-bar-container">
-        <div id="seek-time"></div>
-        <div id="s-hover"></div>
-        <div id="seek-bar"></div>
-      </div>
-    </div>
-    <div id="player-content">
-      <div id="album-art">
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/1.jpg" class="active" id="_1" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/2.jpg" id="_2" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/3.jpg" id="_3" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/4.jpg" id="_4" />
-        <img src="https://singhimalaya.github.io/Codepen/assets/img/album-arts/5.jpg" id="_5" />
-        <div id="buffer-box">Buffering ...</div>
-      </div>
-      <div id="player-controls">
-        <div class="control">
-          <div class="button" id="play-previous">
-            <i class="fas fa-backward"></i>
-          </div>
-        </div>
-        <div class="control">
-          <div class="button" id="play-pause-button">
-            <i class="fas fa-play"></i>
-          </div>
-        </div>
-        <div class="control">
-          <div class="button" id="play-next">
-            <i class="fas fa-forward"></i>
+      <h1>For You, Mi Amor</h1>
+      <p>5 songs that remind me of us. Press play and read why each one is special.</p>
+    </header>
+
+    <!-- Now Playing -->
+    <section aria-label="Now playing" class="fade-in delay-1" style="width:100%;">
+      <!-- Album Art -->
+      <div class="art-wrapper">
+        <div class="art" id="albumArt">
+          <img src="lovey.png" alt="Playlist cover art with roses and hearts" class="art-img" />
+          <div class="art-gradient" id="artGradient"></div>
+          <div class="art-vinyl">
+            <div class="vinyl-disc" id="vinylDisc">
+              <div class="vinyl-center"></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
-<script src="music.js"></script>
-    
+
+      <!-- Song Info -->
+      <div class="song-info">
+        <h2 id="songTitle">Colors</h2>
+        <p class="artist" id="songArtist">Halsey</p>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar">
+          <div class="progress-fill" id="progressFill" style="width:0%"></div>
+        </div>
+        <div class="progress-times">
+          <span id="timeCurrent">0:00</span>
+          <span id="timeDuration">4:23</span>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button class="ctrl-btn" id="prevBtn" aria-label="Previous song">
+          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        <button class="play-btn" id="playBtn" aria-label="Play">
+          <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <button class="ctrl-btn" id="nextBtn" aria-label="Next song">
+          <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+      </div>
+
+      <!-- Lyrics & Love Note (hidden until playing) -->
+      <div class="reveal-area" id="revealArea" style="display:none;"></div>
+    </section>
+
+    <!-- Playlist -->
+    <section aria-label="Playlist" class="playlist fade-in delay-2" style="width:100%;">
+      <div class="playlist-header">
+        <h3>Our Playlist</h3>
+        <span>5 songs</span>
+      </div>
+      <div class="playlist-cols">
+        <span class="col-num">#</span>
+        <span class="col-title">Title</span>
+        <span class="col-time">Time</span>
+      </div>
+      <div id="songListContainer"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer fade-in delay-3">
+      Made with
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      just for you
+    </footer>
+  </main>
+
+  <script src="music.js"></script>
 </body>
 </html>
