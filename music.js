@@ -5,7 +5,7 @@ const songs = [
     title: "Colors",
     artist: "Halsey",
     src: "music/colors-trimmed.mp3",
-    lyricSnippet: '"I found a love, for me... darling just dive right in and follow my lead. Well, I found a girl, beautiful and sweet. Oh, I never knew you were the someone waiting for me."',
+    lyricSnippet: '"Everything is blue His pills, his hands, his jeans And now Im covered in the colors Pulled apart at the seams And its blue And its blue Everything is grey His hair, his smoke, his dreams And now hes so devoid of color He dont know what it means And hes blue And hes blue"',
     loveNote: "This song is literally us. The first time I heard it, I thought of you dancing with me in the kitchen at 2am. You make every ordinary moment feel like a movie scene.",
     duration: "4:23",
     gradient: "linear-gradient(135deg, rgba(136,19,55,.4), rgba(13,13,13,.8))"
