@@ -15,7 +15,7 @@ yesBtn.addEventListener("click", () => {
     gif.src = "https://media.giphy.com/media/UMon0fuimoAN9ueUNP/giphy.gif";
   } else if (clickCount === 2) {
     // Second click: Go back to intro
-    window.location.href = "intro.html";
+    window.location.href = "index.html";
   }
 });
 
