@@ -6,7 +6,7 @@ const songs = [
     artist: "Halsey",
     src: "Colors.mp3",
     lyricSnippet: '"Everything is blue His pills, his hands, his jeans And now Im covered in the colors Pulled apart at the seams And its blue And its blue Everything is grey His hair, his smoke, his dreams And now hes so devoid of color He dont know what it means And hes blue And hes blue"',
-    loveNote: "This song is literally us. The first time I heard it, I thought of you dancing with me in the kitchen at 2am. You make every ordinary moment feel like a movie scene.",
+    loveNote: "i placed this song coz you really like this song reently and i also like it coz of the edits that came out of this audio.",
     duration: "0:43",
     gradient: "linear-gradient(135deg, rgba(136,19,55,.4), rgba(13,13,13,.8))"
   },
@@ -16,7 +16,7 @@ const songs = [
     artist: "Zayne Malik",
     src: "Pillowtalk.mp3",
     lyricSnippet: '"I love to hold you close, tonight and always I love to wake up next to you So we\'ll piss off the neighbors In the place that feels the tears The place to lose your fears Yeah, reckless behavior A place that is so pure, so dirty and raw In the bed all day, bed all day, bed all day"',
-    loveNote: "I love every single part of you, even the parts you think are flawed. You are my entire world and I wouldn't change a single thing about you, baby.",
+    loveNote: "this song reallllyy reminds of you hehe and the things we'd do together- wholsesomely yes mwa",
     duration: "0:30",
     gradient: "linear-gradient(135deg, rgba(157,23,77,.4), rgba(13,13,13,.8))"
   },
@@ -26,7 +26,7 @@ const songs = [
     artist: "Artic Monkeys",
     src: "Iwanna be yours.mp3",
     lyricSnippet: '"At least as deep as the Pacific Ocean Now I wanna be yours Secrets I have held in my heart Are harder to hide than I thought Maybe I just wanna be yours I wanna be yours, I wanna be yours"',
-    loveNote: "Remember that night we stayed up until sunrise just talking? You are the reason I believe in forever. Every heartbeat is for you.",
+    loveNote: "this song was the song that keeps repeating in my head before we dated, my urge to post this song on my notes before was so strong XD but i wasnt so sure you liked mme to so i didnt XD",
     duration: "0:26",
     gradient: "linear-gradient(135deg, rgba(153,27,27,.4), rgba(13,13,13,.8))"
   },
@@ -36,7 +36,7 @@ const songs = [
     artist: "Katherine McPhee",
     src: "Terrified.mp3",
     lyricSnippet: '"You said it again, my hearts in motion Every word feels like a shooting star Im at the edge of my emotions Watching the shadows burning in the dark And Im in love"',
-    loveNote: "When we're 70 and gray, I still want to be dancing with you. This song reminds me that what we have is timeless. You're my forever person.",
+    loveNote: "when you recommended me this song i was truly terrified realizing that i feel abolutley deep and decided to trust you and my feelings that all will work out.",
     duration: "0:26",
     gradient: "linear-gradient(135deg, rgba(120,53,15,.4), rgba(13,13,13,.8))"
   },
@@ -46,7 +46,7 @@ const songs = [
     artist: "Laufey",
     src: "Valentine.mp3",
     lyricSnippet: '"Cause I think Ive fallen In love this time I blinked and suddenly, I had a valentine (Valentine)"',
-    loveNote: "It feels like my heart knew you before we ever met. Every moment with you feels like it was meant to be. I'd choose you in every lifetime. Happy Valentine's Day, my love.",
+    loveNote: "lastly,this song is dedicated to our first valentine together! the first of may!buon san valentino mi amore! happy valentines to us baby! ",
     duration: "0:43",
     gradient: "linear-gradient(135deg, rgba(112,26,117,.4), rgba(13,13,13,.8))"
   }
