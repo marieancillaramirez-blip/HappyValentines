@@ -4,50 +4,50 @@ const songs = [
     id: 1,
     title: "Colors",
     artist: "Halsey",
-    src: "music/colors-trimmed.mp3",
+    src: "Colors.mp3",
     lyricSnippet: '"Everything is blue His pills, his hands, his jeans And now Im covered in the colors Pulled apart at the seams And its blue And its blue Everything is grey His hair, his smoke, his dreams And now hes so devoid of color He dont know what it means And hes blue And hes blue"',
     loveNote: "This song is literally us. The first time I heard it, I thought of you dancing with me in the kitchen at 2am. You make every ordinary moment feel like a movie scene.",
-    duration: "4:23",
+    duration: "0:43",
     gradient: "linear-gradient(135deg, rgba(136,19,55,.4), rgba(13,13,13,.8))"
   },
   {
     id: 2,
     title: "Pillow Talk",
     artist: "Zayne Malik",
-    src: "music/colors-trimmed.mp3",
-    lyricSnippet: '"Cause all of me loves all of you. Love your curves and all your edges, all your perfect imperfections. Give your all to me, I\'ll give my all to you."',
+    src: "Pillowtalk.mp3",
+    lyricSnippet: '"I love to hold you close, tonight and always I love to wake up next to you So we\'ll piss off the neighbors In the place that feels the tears The place to lose your fears Yeah, reckless behavior A place that is so pure, so dirty and raw In the bed all day, bed all day, bed all day"',
     loveNote: "I love every single part of you, even the parts you think are flawed. You are my entire world and I wouldn't change a single thing about you, baby.",
-    duration: "4:29",
+    duration: "0:30",
     gradient: "linear-gradient(135deg, rgba(157,23,77,.4), rgba(13,13,13,.8))"
   },
   {
     id: 3,
     title: "I wanna be yours",
     artist: "Artic Monkeys",
-    src: "music/colors-trimmed.mp3",
-    lyricSnippet: '"There goes my heart beating, cause you are the reason. I\'m losing my sleep, please come back now. And there goes my mind racing, and you are the reason that I\'m still breathing, I\'m hopeless now."',
+    src: "Iwanna be yours.mp3",
+    lyricSnippet: '"At least as deep as the Pacific Ocean Now I wanna be yours Secrets I have held in my heart Are harder to hide than I thought Maybe I just wanna be yours I wanna be yours, I wanna be yours"',
     loveNote: "Remember that night we stayed up until sunrise just talking? You are the reason I believe in forever. Every heartbeat is for you.",
-    duration: "3:24",
+    duration: "0:26",
     gradient: "linear-gradient(135deg, rgba(153,27,27,.4), rgba(13,13,13,.8))"
   },
   {
     id: 4,
     title: "Terrified",
     artist: "Katherine McPhee",
-    src: "music/colors-trimmed.mp3",
-    lyricSnippet: '"So honey now, take me into your loving arms. Kiss me under the light of a thousand stars. Place your head on my beating heart. I\'m thinking out loud, maybe we found love right where we are."',
+    src: "Terrified.mp3",
+    lyricSnippet: '"You said it again, my hearts in motion Every word feels like a shooting star Im at the edge of my emotions Watching the shadows burning in the dark And Im in love"',
     loveNote: "When we're 70 and gray, I still want to be dancing with you. This song reminds me that what we have is timeless. You're my forever person.",
-    duration: "4:41",
+    duration: "0:26",
     gradient: "linear-gradient(135deg, rgba(120,53,15,.4), rgba(13,13,13,.8))"
   },
   {
     id: 5,
     title: "Valentine",
     artist: "Laufey",
-    src: "music/colors-trimmed.mp3",
-    lyricSnippet: '"I have died every day waiting for you. Darling, don\'t be afraid, I have loved you for a thousand years. I\'ll love you for a thousand more."',
+    src: "Valentine.mp3",
+    lyricSnippet: '"Cause I think Ive fallen In love this time I blinked and suddenly, I had a valentine (Valentine)"',
     loveNote: "It feels like my heart knew you before we ever met. Every moment with you feels like it was meant to be. I'd choose you in every lifetime. Happy Valentine's Day, my love.",
-    duration: "4:45",
+    duration: "0:43",
     gradient: "linear-gradient(135deg, rgba(112,26,117,.4), rgba(13,13,13,.8))"
   }
 ];
@@ -141,13 +141,20 @@ function updateDisplay() {
   timeDuration.textContent = song.duration;
   artGradient.style.background = song.gradient;
 
-  if (mainAudio.src !== song.src) {
+  // Change source only if it's different
+  // We use .getAttribute to avoid full URL comparison issues
+  if (mainAudio.getAttribute('src') !== song.src) {
+    mainAudio.src = song.src;
+    progress = 0; // Reset progress for new song
+  }
+
+  // Update UI State
+  if (isPlaying) {
     albumArt.classList.add("playing");
     vinylDisc.classList.add("spinning");
     playIcon.style.display = "none";
     pauseIcon.style.display = "block";
     playBtn.setAttribute("aria-label", "Pause");
-    mainAudio.src = song.src;
   } else {
     albumArt.classList.remove("playing");
     vinylDisc.classList.remove("spinning");
@@ -227,52 +234,69 @@ function togglePlay() {
   updateDisplay();
 }
 
+mainAudio.addEventListener("timeupdate", () => {
+  if (mainAudio.duration) {
+    progress = (mainAudio.currentTime / mainAudio.duration) * 100;
+    updateProgress();
+  }
+});
+
+// Auto-play next song when current one ends
+mainAudio.addEventListener("ended", () => {
+  goNext(true);
+});
+
 function selectSong(index) {
   currentIndex = index;
-  progress = 0;
   isPlaying = true;
-  startProgress();
   updateDisplay();
+  mainAudio.play();
   showReveals();
 }
 
 function goNext(auto) {
   if (currentIndex < songs.length - 1) {
     currentIndex++;
-    progress = 0;
-    isPlaying = true;
-    startProgress();
-    updateDisplay();
+    isPlaying = true; // Ensure state is set to playing
+    updateDisplay();  // Update the src and UI
+    mainAudio.play(); // Start the actual music
     showReveals();
   } else {
+    // If it's the last song, stop everything
     isPlaying = false;
-    progress = 0;
-    stopProgress();
+    mainAudio.pause();
+    mainAudio.currentTime = 0;
     updateDisplay();
     revealArea.style.display = "none";
   }
 }
 
 function goPrev() {
-  if (progress > 10) {
-    progress = 0;
-    updateProgress();
-    showReveals();
+  // If song is more than 3 seconds in, just restart the current song
+  if (mainAudio.currentTime > 3) {
+    mainAudio.currentTime = 0;
+    mainAudio.play();
     return;
   }
-  currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-  progress = 0;
+
+  // Otherwise, go to the previous song
+  if (currentIndex > 0) {
+    currentIndex--;
+  } else {
+    currentIndex = songs.length - 1; // Loop to the end if at the start
+  }
+
   isPlaying = true;
-  startProgress();
   updateDisplay();
+  mainAudio.play();
   showReveals();
 }
 
 // ── Click on progress bar to seek ─────────────────
 progressBar.addEventListener("click", function(e) {
   var rect = progressBar.getBoundingClientRect();
-  progress = ((e.clientX - rect.left) / rect.width) * 100;
-  updateProgress();
+  var pct = (e.clientX - rect.left) / rect.width;
+  mainAudio.currentTime = pct * mainAudio.duration; // This moves the actual music
 });
 
 // ── Events ────────────────────────────────────────
